@@ -42,11 +42,16 @@ $SQL1 ="SELECT DISTINCT b.CURRENCY_CODE, t.NAME FROM fnd_currencies_tl t, fnd_cu
 
 </tr>
 <tr>
-<td align="right">Payment Acc.:</td>
-<td align="right" colspan="3">
+<td align="right">Account:</td>
+<td align="right" colspan="1">
 <select name="cbocashacc" id="cbocashacc">
 <option value="0">--</option>
 </select>
+</td>
+
+<td align="right">Vendor/Emp:</td>
+<td align="right" colspan="1">
+<input name="ven_emp_text" id="ven_emp_text" type="text" style="background-color:#FFC;" onChange="javascript:SEARCH_PAYEE_GET_RESULT();"/>
 </td>
 </tr>
 </table>
@@ -72,7 +77,7 @@ $SQL1 ="SELECT DISTINCT b.CURRENCY_CODE, t.NAME FROM fnd_currencies_tl t, fnd_cu
 <td align="right">Payee:</td>
 <td><input name="txtPayeeNum" type="text" id="txtPayeeNum" size="8" onkeydown="FinfKeyEvent(event,this.id,'payeen','get_payee',0)" onblur="ReturnFindValueDB(this.value,0)"/></td>
 <td width="16px"><input type="button" name="search_payee" id="search_payee"  class="S_img" onclick="SEARCH_PAYEE_OVERLAY();" ></td>
-<td colspan="2"><input name="txtPayeeName" type="text" id="txtPayeeName" /></td>
+<td colspan="2"><input readonly name="txtPayeeName" type="text" id="txtPayeeName" /></td>
 </tr>
 <tr align="left">
   <td align="right">Trans. Date:</td>

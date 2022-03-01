@@ -475,6 +475,7 @@ function GET_MATCH_PO_DTL() {
 	var invcnum  = document.getElementById('invcnum').value;
 	var txtInvDate  = document.getElementById('txtInvDate').value;
 	var vendor_id  = document.getElementById('vendorid_1').value;
+	var header_ven_emp_number  = document.getElementById('ven_emp_text').value;
 	
 	if (!ValidateInvoiceData(txtInvDate,invcnum)){
 		document.getElementById('ponum_1').selectedIndex=0;
@@ -489,7 +490,7 @@ function GET_MATCH_PO_DTL() {
 	
     // Create some variables we need to send to our PHP file
     var url = "AP_APP_MATCH_DB.php";
-	var vars = "po_num_txt="+po_num_txt+"&po_id="+po_id+"&matchtype="+matchtype+"&rcv_num="+rcv_num+"&invperiod="+invperiod+"&store="+store+"&invcnum="+invcnum+"&txtInvDate="+txtInvDate+"&ORGANIZATION_ID="+ORGANIZATION_ID+"&ORG_ID="+ORG_ID+"&vendor_id="+vendor_id+"&uid="+uid+"&action=GET_MATCH_DTL";
+	var vars = "po_num_txt="+po_num_txt+"&po_id="+po_id+"&matchtype="+matchtype+"&rcv_num="+rcv_num+"&invperiod="+invperiod+"&store="+store+"&invcnum="+invcnum+"&txtInvDate="+txtInvDate+"&ORGANIZATION_ID="+ORGANIZATION_ID+"&ORG_ID="+ORG_ID+"&vendor_id="+vendor_id+"&uid="+uid+"&header_ven_emp_number="+header_ven_emp_number+"&action=GET_MATCH_DTL";
 	
     hr.open("POST", url, true);
   
@@ -634,6 +635,12 @@ function UpdateSummaryGrid() {
  document.getElementById("NetAmount").value=eval(NetAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
  document.getElementById("txtAmount").value=eval(NetAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
  	
+ 	if (rowCount>1){
+		//Disable Header Vendor input to prevent change the vendor code				  
+		document.getElementById("ven_emp_text").readOnly=true;
+	}else{	
+		document.getElementById("ven_emp_text").readOnly=false;
+	}	
 }
 <!------------------------------------------------------------------------------------------------>
 function Clear(contain){

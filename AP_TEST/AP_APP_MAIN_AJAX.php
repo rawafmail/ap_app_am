@@ -13,6 +13,8 @@ function SEARCH_PAYEE_OVERLAY() {
 	var el = document.getElementById("SEARCH_PAYEE_OVERLAY");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 	if (el.style.visibility == "visible"){
+		document.getElementById("search_PAYEE_N").value="%";
+		SEARCH_PAYEE_GET_RESULT();
 	document.getElementById("search_PAYEE_N").focus();
 	document.getElementById("search_PAYEE_N").select();
 	}
@@ -22,12 +24,13 @@ function SEARCH_PAYEE_GET_RESULT(){
 	var uid =  "<?php print $uid ; ?>";
 	var ORG_ID =  "<?php print $ORG_ID; ?>";
 	var search_item = search_txt(document.getElementById("search_PAYEE_N").value);
+	var ven_emp_text = document.getElementById("ven_emp_text").value;
 	
 	 // Create our XMLHttpRequest object
     var hr = new XMLHttpRequest();
     // Create some variables we need to send to our PHP file
     var url = "AP_APP_MAIN_DB.php";
-	var vars = "ORG_ID="+ORG_ID+"&uid="+uid+"&search_item="+search_item+"&action=SEARCH_PAYEE_GET_RESULT";
+	var vars = "ORG_ID="+ORG_ID+"&uid="+uid+"&search_item="+search_item+"&ven_emp_text="+ven_emp_text+"&action=SEARCH_PAYEE_GET_RESULT";
     hr.open("POST", url, true);
     // Set content type header information for sending url encoded variables in the request
     //hr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
@@ -642,7 +645,13 @@ function BuildHeaderSQL(){
 	}else{
 		BuilderHeaderSQL = BuilderHeaderSQL + "null AS  CHEQUE_MATURITY_DATE,";
 	}
-	BuilderHeaderSQL = BuilderHeaderSQL + document.getElementById('nonE').options[document.getElementById('nonE').selectedIndex].value + "  AS  NON_ENDORSEMENT";
+	BuilderHeaderSQL = BuilderHeaderSQL + document.getElementById('nonE').options[document.getElementById('nonE').selectedIndex].value + "  AS  NON_ENDORSEMENT,";
+	
+	var ven_emp_text = jQuery("#ven_emp_text").value;
+	if(ven_emp_text=='undefined' || typeof ven_emp_text === "undefined"){
+		ven_emp_text='0';
+	}
+	BuilderHeaderSQL = BuilderHeaderSQL +"'"+ ven_emp_text +"'"+ "  AS  VEN_EMP_CODE ";
 	BuilderHeaderSQL = BuilderHeaderSQL +" FROM DUAL";
 
 	return BuilderHeaderSQL;

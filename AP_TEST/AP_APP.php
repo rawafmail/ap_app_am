@@ -150,6 +150,9 @@ function searchForEditHeader(payid){
 			document.getElementById("cboAppv2").value = datacols[12];
 			if (document.getElementById('cboAppv1').selectedIndex==-1){document.getElementById('cboAppv1').selectedIndex=0;}			
 			if (document.getElementById('cboAppv2').selectedIndex==-1){document.getElementById('cboAppv2').selectedIndex=0;}
+			
+			//Update Vendor/Emp Field
+			document.getElementById("ven_emp_text").value = datacols[28];
 			//--
 			EnableDisableButtons();			
 			GET_PREPAY_VENDORS_LOV(payid);  
